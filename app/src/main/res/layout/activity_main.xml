@@ -18,6 +18,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/image_title" />
 
+
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
