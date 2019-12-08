@@ -1,5 +1,6 @@
 package com.example.android.sample.easycalculationstudyapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +19,13 @@ class MainActivity : AppCompatActivity() {
         spinner.adapter = arrayAdapter
 
         button.setOnClickListener {
-            val numberOfQuestion = spinner.selectedItem
+
+            //選択したアイテムを入手
+            val numberOfQuestion : Int = spinner.selectedItem.toString().toInt()
+
+            val intent = Intent(this@MainActivity, TestActivity::class.java)
+            intent.putExtra("numberOfQuestion", numberOfQuestion)
+            startActivity(intent)
         }
     }
 }
