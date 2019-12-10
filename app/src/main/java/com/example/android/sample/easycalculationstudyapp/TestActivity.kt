@@ -11,6 +11,11 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
 
+        val bundle = intent.extras
+        val numberOfQuestion : Int = bundle.getInt("numberOfQuestion")
+        textViewRemaining.text = numberOfQuestion.toString()
+
+
         checkAnswer.setOnClickListener {
             answerChack()
         }
