@@ -43,7 +43,21 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun question() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        buttonReturn.isEnabled = false
+
+        checkAnswer.isEnabled = true
+        number0.isEnabled = true
+        number1.isEnabled = true
+        number2.isEnabled = true
+        number3.isEnabled = true
+        number4.isEnabled = true
+        number5.isEnabled = true
+        number6.isEnabled = true
+        number7.isEnabled = true
+        number8.isEnabled = true
+        number9.isEnabled = true
+        minus.isEnabled = true
+        clearButton.isEnabled = true
     }
 
     private fun answerChack() {
