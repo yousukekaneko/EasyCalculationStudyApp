@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_test.*
+import kotlin.random.Random
 
 class TestActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -58,6 +59,16 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
         number9.isEnabled = true
         minus.isEnabled = true
         clearButton.isEnabled = true
+
+        val leftInt = Random.nextInt(100) + 1
+        val rightInt = Random.nextInt(100) + 1
+        textViewLeft.text = leftInt.toString()
+        textViewRight.text = rightInt.toString()
+
+        when(Random.nextInt(2) + 1) {
+            1 -> textViewOperator.text = "+"
+            2 -> textViewOperator.text = "-"
+        }
     }
 
     private fun answerChack() {
