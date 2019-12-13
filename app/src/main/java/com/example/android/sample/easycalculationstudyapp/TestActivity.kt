@@ -3,6 +3,7 @@ package com.example.android.sample.easycalculationstudyapp
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_test.*
 import kotlin.random.Random
 
@@ -69,6 +70,10 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
             1 -> textViewOperator.text = "+"
             2 -> textViewOperator.text = "-"
         }
+
+        textViewAnswer.text = ""
+
+        imageView.visibility = View.VISIBLE
     }
 
     private fun answerChack() {
