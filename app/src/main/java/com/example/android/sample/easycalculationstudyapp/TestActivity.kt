@@ -2,6 +2,7 @@ package com.example.android.sample.easycalculationstudyapp
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_test.*
@@ -80,7 +81,28 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onClick(p0: View?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onClick(v: View?) {
+
+        val button : Button = v as Button
+
+        when (v?.id) {
+            R.id.clearButton -> textViewAnswer.text = ""
+
+            R.id.minus -> if (textViewAnswer.text.toString() == "") {
+                textViewAnswer.text = "-"
+            }
+
+            R.id.number0 -> if (textViewAnswer.text.toString() != "0" && textViewAnswer.text.toString() != "-") {
+                textViewAnswer.append(button.text)
+            }
+
+            else
+                -> if (textViewAnswer.text.toString() == "0") {
+                textViewAnswer.text = button.text
+            } else {
+                textViewAnswer.append(button.text)
+            }
+
+        }
     }
 }
