@@ -11,6 +11,7 @@ import kotlin.random.Random
 class TestActivity : AppCompatActivity(), View.OnClickListener {
 
     var numberOfRemaining = 0
+    var numberOfCorrect = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,6 +20,7 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
         val bundle = intent.extras
         val numberOfQuestion : Int = bundle.getInt("numberOfQuestion")
         textViewRemaining.text = numberOfQuestion.toString()
+        numberOfCorrect = 0
 
         numberOfRemaining = numberOfQuestion
 
@@ -101,6 +103,24 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
         textViewRemaining.text = numberOfRemaining.toString()
 
         imageView.visibility = View.VISIBLE
+
+        val intMyAnswer : Int = textViewAnswer.text.toString().toInt()
+
+        val intTrueAnswer : Int =
+            if (textViewOperator.text == "+") {
+                textViewLeft.text.toString().toInt() + textViewRight.text.toString().toInt()
+            } else {
+                textViewLeft.text.toString().toInt() - textViewRight.text.toString().toInt()
+            }
+
+        if (intMyAnswer == intTrueAnswer) {
+            numberOfCorrect += 1
+            textViewCorrect.text = numberOfCorrect.toString()
+            imageView.setImageResource(R.drawable.pic_correct)
+
+        } else {
+            imageView.setImageResource(R.drawable.pic_incorrect)
+        }
 
     }
 
