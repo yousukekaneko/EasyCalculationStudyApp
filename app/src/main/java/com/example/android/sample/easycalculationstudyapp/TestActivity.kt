@@ -10,6 +10,8 @@ import kotlin.random.Random
 
 class TestActivity : AppCompatActivity(), View.OnClickListener {
 
+    var numberOfRemaining = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
@@ -17,6 +19,8 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
         val bundle = intent.extras
         val numberOfQuestion : Int = bundle.getInt("numberOfQuestion")
         textViewRemaining.text = numberOfQuestion.toString()
+
+        numberOfRemaining = numberOfQuestion
 
 
         checkAnswer.setOnClickListener {
@@ -78,7 +82,26 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun answerChack() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        buttonReturn.isEnabled = false
+        checkAnswer.isEnabled = false
+        number0.isEnabled = false
+        number1.isEnabled = false
+        number2.isEnabled = false
+        number3.isEnabled = false
+        number4.isEnabled = false
+        number5.isEnabled = false
+        number6.isEnabled = false
+        number7.isEnabled = false
+        number8.isEnabled = false
+        number9.isEnabled = false
+        minus.isEnabled = false
+        clearButton.isEnabled = false
+
+        numberOfRemaining -= 1
+        textViewRemaining.text = numberOfRemaining.toString()
+
+        imageView.visibility = View.VISIBLE
+
     }
 
     override fun onClick(v: View?) {
