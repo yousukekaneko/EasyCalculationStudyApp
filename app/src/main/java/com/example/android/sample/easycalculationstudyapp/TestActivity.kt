@@ -1,5 +1,9 @@
 package com.example.android.sample.easycalculationstudyapp
 
+import android.media.AudioAttributes
+import android.media.AudioManager
+import android.media.SoundPool
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -12,6 +16,10 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
 
     var numberOfRemaining = 0
     var numberOfCorrect = 0
+    lateinit var sound : SoundPool
+
+    var intSoundId_correct = 0
+    var intSoundId_incorrent = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,8 +55,30 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
         clearButton.setOnClickListener(this)
 
         question()
+    }
 
+    override fun onResume() {
+        super.onResume()
 
+        sound = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            SoundPool.Builder().setAudioAttributes(AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_MEDIA)
+                .build())
+                .setMaxStreams(1)
+                .build()
+        } else {
+            SoundPool(1, AudioManager.STREAM_MUSIC, 0)
+        }
+
+        intSoundId_correct = sound.load(this, R.raw.sound_correct, 1)
+        intSoundId_incorrent = sound.load(this, R.raw.sound_incorrect, 1)
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        sound.release()
     }
 
     private fun question() {
@@ -117,9 +147,11 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
             numberOfCorrect += 1
             textViewCorrect.text = numberOfCorrect.toString()
             imageView.setImageResource(R.drawable.pic_correct)
+            sound.play(intSoundId_correct, 1.0f, 1.0f, 0, 0, 1.0f)
 
         } else {
             imageView.setImageResource(R.drawable.pic_incorrect)
+            sound.play(intSoundId_incorrent, 1.0f, 1.0f, 0, 0, 1.0f)
         }
 
     }
