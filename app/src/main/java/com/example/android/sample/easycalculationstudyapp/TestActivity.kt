@@ -157,7 +157,7 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         val intPoint : Int = ((numberOfCorrect.toDouble() /(numberOfQuestion - numberOfRemaining).toDouble()) * 100).toInt()
-
+        textViewPoint.text = intPoint.toString()
     }
 
     override fun onClick(v: View?) {
