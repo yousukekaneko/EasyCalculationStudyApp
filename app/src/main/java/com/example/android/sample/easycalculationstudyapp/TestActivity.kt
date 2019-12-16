@@ -14,6 +14,8 @@ import kotlin.random.Random
 
 class TestActivity : AppCompatActivity(), View.OnClickListener {
 
+    var numberOfQuestion : Int = 0
+
     var numberOfRemaining = 0
     var numberOfCorrect = 0
     lateinit var sound : SoundPool
@@ -26,7 +28,7 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_test)
 
         val bundle = intent.extras
-        val numberOfQuestion : Int = bundle.getInt("numberOfQuestion")
+        numberOfQuestion = bundle.getInt("numberOfQuestion")
         textViewRemaining.text = numberOfQuestion.toString()
         numberOfCorrect = 0
 
@@ -153,6 +155,8 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
             imageView.setImageResource(R.drawable.pic_incorrect)
             sound.play(intSoundId_incorrent, 1.0f, 1.0f, 0, 0, 1.0f)
         }
+
+        val intPoint : Int = ((numberOfCorrect.toDouble() /(numberOfQuestion - numberOfRemaining).toDouble()) * 100).toInt()
 
     }
 
