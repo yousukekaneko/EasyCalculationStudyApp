@@ -158,6 +158,12 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
 
         val intPoint : Int = ((numberOfCorrect.toDouble() /(numberOfQuestion - numberOfRemaining).toDouble()) * 100).toInt()
         textViewPoint.text = intPoint.toString()
+
+        if (numberOfRemaining == 0) {
+            buttonReturn.isEnabled = true
+            checkAnswer.isEnabled = false
+            finishMessage.text = "テスト終了"
+        }
     }
 
     override fun onClick(v: View?) {
