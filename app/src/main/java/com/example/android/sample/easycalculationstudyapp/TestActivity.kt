@@ -10,6 +10,8 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_test.*
+import java.util.*
+import kotlin.concurrent.schedule
 import kotlin.random.Random
 
 class TestActivity : AppCompatActivity(), View.OnClickListener {
@@ -22,6 +24,8 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
 
     var intSoundId_correct = 0
     var intSoundId_incorrent = 0
+
+    lateinit var timer :Timer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,12 +79,16 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
         intSoundId_correct = sound.load(this, R.raw.sound_correct, 1)
         intSoundId_incorrent = sound.load(this, R.raw.sound_incorrect, 1)
 
+        timer = Timer()
+
     }
 
     override fun onPause() {
         super.onPause()
 
         sound.release()
+
+        timer.cancel()
     }
 
     private fun question() {
@@ -163,6 +171,8 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
             buttonReturn.isEnabled = true
             checkAnswer.isEnabled = false
             finishMessage.text = "テスト終了"
+        } else {
+            timer.schedule(1000, {runOnUiThread { question() }})
         }
     }
 
