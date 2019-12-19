@@ -40,7 +40,9 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
 
 
         checkAnswer.setOnClickListener {
-            answerChack()
+            if (textViewAnswer.text.toString() != "" && textViewAnswer.text.toString() != "-" ) {
+                answerChack()
+            }
         }
 
         buttonReturn.setOnClickListener{
