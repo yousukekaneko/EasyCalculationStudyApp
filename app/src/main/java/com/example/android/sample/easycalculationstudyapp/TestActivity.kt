@@ -44,7 +44,7 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         buttonReturn.setOnClickListener{
-
+            finish()
         }
 
         number0.setOnClickListener(this)
