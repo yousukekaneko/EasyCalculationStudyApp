@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_test.*
 import java.util.*
 import kotlin.concurrent.schedule
@@ -40,8 +39,8 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
 
 
         checkAnswer.setOnClickListener {
-            if (textViewAnswer.text.toString() != "" && textViewAnswer.text.toString() != "-" ) {
-                answerChack()
+            if (textViewAnswer.text.toString() != null && textViewAnswer.text.toString() != "-" ) {
+                answerCheck()
             }
         }
 
@@ -122,10 +121,10 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
 
         textViewAnswer.text = ""
 
-        imageView.visibility = View.VISIBLE
+        answerCheckImage.visibility = View.INVISIBLE
     }
 
-    private fun answerChack() {
+    private fun answerCheck() {
         buttonReturn.isEnabled = false
         checkAnswer.isEnabled = false
         number0.isEnabled = false
@@ -144,7 +143,7 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
         numberOfRemaining -= 1
         textViewRemaining.text = numberOfRemaining.toString()
 
-        imageView.visibility = View.VISIBLE
+        answerCheckImage.visibility = View.VISIBLE
 
         val intMyAnswer : Int = textViewAnswer.text.toString().toInt()
 
@@ -158,11 +157,11 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
         if (intMyAnswer == intTrueAnswer) {
             numberOfCorrect += 1
             textViewCorrect.text = numberOfCorrect.toString()
-            imageView.setImageResource(R.drawable.pic_correct)
+            answerCheckImage.setImageResource(R.drawable.pic_correct)
             sound.play(intSoundId_correct, 1.0f, 1.0f, 0, 0, 1.0f)
 
         } else {
-            imageView.setImageResource(R.drawable.pic_incorrect)
+            answerCheckImage.setImageResource(R.drawable.pic_incorrect)
             sound.play(intSoundId_incorrent, 1.0f, 1.0f, 0, 0, 1.0f)
         }
 
@@ -189,16 +188,13 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
                 textViewAnswer.text = "-"
             }
 
-            R.id.number0 -> if (textViewAnswer.text.toString() != "0" && textViewAnswer.text.toString() != "-") {
+            R.id.number0 -> if (textViewAnswer.text.toString() != "0" && textViewAnswer.text.toString() != "-")
                 textViewAnswer.append(button.text)
-            }
 
             else
-                -> if (textViewAnswer.text.toString() == "0") {
-                textViewAnswer.text = button.text
-            } else {
-                textViewAnswer.append(button.text)
-            }
+                -> if (textViewAnswer.text.toString() == "0")
+                textViewAnswer.text = button.text else textViewAnswer.append(button.text)
+
 
         }
     }
